@@ -33,3 +33,5 @@ counts = result.get_counts(circuit)
 print(counts)
 
 plot_histogram(counts)
+
+# As you can see both have almost simillar counts. 
