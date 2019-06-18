@@ -21,6 +21,10 @@ def bitwise_xor(circuit,a,b,c,N):
         circuit.cx(a[i],c[i])
         circuit.cx(b[i],c[i])
 
+def bitwise_xnor(circuit,a,b,c,N):
+    bitwise_xor(circuit,a,b,c,N)
+    for i in range(N):
+        circuit.x(c[i])
 
 # Bitwise AND
 # Registers and circuit.
