@@ -124,5 +124,5 @@ result_sim = job_sim.result()
 # Expected Output : 0101 1010
 # NOTE: In qiskit, little endian is followed and hence the output is actually c a
 #       where c in the bitwise NOT of a
-print("Bitwise OR : ")
+print("Bitwise NOT : ")
 print(result_sim.get_counts(circuit))
