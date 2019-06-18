@@ -16,6 +16,10 @@ def bitwise_not(circuit,a,c,N):
         circuit.cx(a[i],c[i])
         circuit.x(c[i])
 
+def bitwise_xor(circuit,a,b,c,N):
+    for i in range(N):
+        circuit.cx(a[i],c[i])
+        circuit.cx(b[i],c[i])
 
 
 # Bitwise AND
@@ -125,4 +129,43 @@ result_sim = job_sim.result()
 # NOTE: In qiskit, little endian is followed and hence the output is actually c a
 #       where c in the bitwise NOT of a
 print("Bitwise NOT : ")
+print(result_sim.get_counts(circuit))
+
+
+# Bitwise XOR
+# Registers and circuit.
+a = QuantumRegister(4)
+b = QuantumRegister(4)
+c = QuantumRegister(4)
+ca = ClassicalRegister(4)
+cb = ClassicalRegister(4)
+cc = ClassicalRegister(4)
+circuit = QuantumCircuit(a, b, c, ca, cb, cc)
+
+# Inputs
+# a = 1010
+# b = 1011
+circuit.x(a[1])
+circuit.x(a[3])
+circuit.x(b[0])
+circuit.x(b[1])
+circuit.x(b[3])
+
+# Take the bitwise XOR.
+bitwise_xor(circuit, a, b, c, 4)
+
+# Measure.
+circuit.measure(a, ca)
+circuit.measure(b, cb)
+circuit.measure(c, cc)
+
+# Simulate the circuit.
+backend_sim = Aer.get_backend('qasm_simulator')
+job_sim = execute(circuit, backend_sim)
+result_sim = job_sim.result()
+
+# Expected Output : 0001 1011 1010
+# NOTE: In qiskit, little endian is followed and hence the output is actually c b a
+#       where c in the bitwise XOR of a and b
+print("Bitwise XOR : ")
 print(result_sim.get_counts(circuit))
