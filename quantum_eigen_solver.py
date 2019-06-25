@@ -71,7 +71,8 @@ optimizer = GradientDescentOptimizer(0.5)
 
 variables = [0.3, 2.5]
 variables_gd = [variables]
-for i in range(20):
+num_iterations = 20
+for i in range(num_iterations):
     variables = optimizer.step(getCost, variables)
     variables_gd.append(variables)
 
